@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       let device = await tx.device.findUnique({
         where: { deviceKey },
       });

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 function DeviceDashboard() {
+  const REFRESH_INTERVAL_MS = 60000;
   const [devices, setDevices] = useState([]);
 
   const fetchDevices = async () => {
@@ -16,7 +17,7 @@ function DeviceDashboard() {
 
     const interval = setInterval(() => {
       fetchDevices();
-    }, 60000);
+    }, REFRESH_INTERVAL_MS);
 
     return () => clearInterval(interval);
   }, []);

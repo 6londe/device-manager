@@ -16,7 +16,7 @@ export async function GET() {
 
     const currentTimestamp = new Date();
 
-    const devicesWithStatus = devices.map((device) => {
+    const devicesWithStatus = devices.map((device: any) => {
       const latestHeartbeat = device.Heartbeat[0];
       const secSinceLastHeartbeat =
         latestHeartbeat && latestHeartbeat.timestamp
@@ -52,7 +52,7 @@ export async function GET() {
       };
     });
 
-    const sortedDevices = devicesWithStatus.sort((a, b) =>
+    const sortedDevices = devicesWithStatus.sort((a: any, b: any) =>
       a.nickname.localeCompare(b.nickname)
     );
 

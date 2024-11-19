@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Device {
+  id        Int        @id @default(autoincrement())
+  deviceKey String     @unique
+  nickname  String
+  Heartbeat Heartbeat[]
+}
+
+model Heartbeat {
+  id                Int      @id @default(autoincrement())
+  timestamp         DateTime @default(now())
+  appState          Int
+  deviceId          Int
+  tilt              String
+  batteryPercentage Int
+  isCharging        Boolean
+  currentScreen     String
+  Device            Device   @relation(fields: [deviceId], references: [id])
+}

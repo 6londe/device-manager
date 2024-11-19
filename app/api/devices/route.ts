@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+const ONLINE_MAX_SEC_SINCE_LAST_HEARTBEAT = 60;
 
 export async function GET() {
   try {
@@ -15,9 +16,9 @@ export async function GET() {
 
     const currentTimestamp = new Date();
 
-    const devicesWithLastHeartbeat = devices.map((device) => {
+    const devicesWithStatus = devices.map((device) => {
       const latestHeartbeat = device.Heartbeat[0];
-      const lastHeartbeat =
+      const secSinceLastHeartbeat =
         latestHeartbeat && latestHeartbeat.timestamp
           ? Math.floor(
               (currentTimestamp.getTime() -
@@ -26,15 +27,32 @@ export async function GET() {
             )
           : null;
 
+      const status =
+        secSinceLastHeartbeat !== null &&
+        secSinceLastHeartbeat <= ONLINE_MAX_SEC_SINCE_LAST_HEARTBEAT
+          ? 'online'
+          : 'offline';
+
       return {
         id: device.id,
         deviceKey: device.deviceKey,
         nickname: device.nickname,
-        lastHeartbeat: lastHeartbeat !== null ? lastHeartbeat : null,
+        status: status,
+        timeSinceLastHeartbeat:
+          secSinceLastHeartbeat !== null ? secSinceLastHeartbeat : null,
+        lastHeartbeatDetails: latestHeartbeat
+          ? {
+              timestamp: latestHeartbeat.timestamp,
+              tilt: latestHeartbeat.tilt,
+              batteryPercentage: latestHeartbeat.batteryPercentage,
+              isCharging: latestHeartbeat.isCharging,
+              currentScreen: latestHeartbeat.currentScreen,
+            }
+          : null,
       };
     });
 
-    const sortedDevices = devicesWithLastHeartbeat.sort((a, b) =>
+    const sortedDevices = devicesWithStatus.sort((a, b) =>
       a.nickname.localeCompare(b.nickname)
     );
 

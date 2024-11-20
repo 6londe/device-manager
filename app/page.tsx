@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import config from '../config';
 
 function DeviceDashboard() {
-  const REFRESH_INTERVAL_MS = 60000;
   const [devices, setDevices] = useState([]);
 
   const fetchDevices = async () => {
@@ -17,7 +17,7 @@ function DeviceDashboard() {
 
     const interval = setInterval(() => {
       fetchDevices();
-    }, REFRESH_INTERVAL_MS);
+    }, config.heartbeatIntervalMs);
 
     return () => clearInterval(interval);
   }, []);

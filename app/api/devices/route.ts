@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import config from '../../../config';
 
 const prisma = new PrismaClient();
-const ONLINE_MAX_SEC_SINCE_LAST_HEARTBEAT = 60;
 
 export async function GET() {
   try {
@@ -29,7 +29,7 @@ export async function GET() {
 
       const status =
         secSinceLastHeartbeat !== null &&
-        secSinceLastHeartbeat <= ONLINE_MAX_SEC_SINCE_LAST_HEARTBEAT
+        secSinceLastHeartbeat <= config.heartbeatIntervalMs * 2
           ? 'online'
           : 'offline';
 

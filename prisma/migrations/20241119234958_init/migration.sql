@@ -17,7 +17,7 @@ CREATE TABLE `Heartbeat` (
     `tilt` VARCHAR(191) NOT NULL,
     `batteryPercentage` INTEGER NOT NULL,
     `isCharging` BOOLEAN NOT NULL,
-    `currentScreen` VARCHAR(191) NOT NULL,
+    `screenImagePath` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

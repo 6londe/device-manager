@@ -1,5 +1,5 @@
-import axios from 'axios';
-import config from '../config';
+const axios = require('axios');
+const config = require('./config.js');
 
 async function checkHeartbeatNotificationConditions() {
   try {

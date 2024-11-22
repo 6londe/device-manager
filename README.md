@@ -17,12 +17,12 @@ npm run dev
 ## Run prod
 
 ```
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 ## Notes
 
-### Initialize mysql
+### Initialize mysql dev
 
 ```
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=[] -e MYSQL_DATABASE=devicemanager -e MYSQL_USER=[] -e MYSQL_PASSWORD=[] -p 3306:3306 -d --restart=always mysql:8.2.0

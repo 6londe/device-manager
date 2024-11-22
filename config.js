@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   heartbeatIntervalMs: 60000,
   deviceOfflineStateThresholdMs: 60000 * 2,
   notificationConditionCheckIntervalMin: 1,

@@ -2,9 +2,9 @@ FROM node:18.18.0
 
 WORKDIR /app
 
-COPY ../package.json package-lock.json ./
-RUN npm install
+RUN npm install axios
 
-COPY cronjob.js ./
+COPY config.js ./ 
+COPY cron/cronjob.js ./
 
 CMD ["node", "cronjob.js"]

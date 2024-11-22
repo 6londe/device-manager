@@ -6,12 +6,18 @@
 cp .env.sample .env
 ```
 
-## Run
+## Run dev
 
 ```
 nvm use 18.18.0
 npm install
 npm run dev
+```
+
+## Run prod
+
+```
+docker-compose up --build
 ```
 
 ## Notes

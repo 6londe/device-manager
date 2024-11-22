@@ -29,7 +29,7 @@ export async function GET() {
 
       const status =
         secSinceLastHeartbeat !== null &&
-        secSinceLastHeartbeat <= config.heartbeatIntervalMs * 2
+        secSinceLastHeartbeat <= config.deviceOfflineStateThresholdMs
           ? 'online'
           : 'offline';
 

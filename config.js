@@ -3,7 +3,7 @@ module.exports = {
   deviceOfflineStateThresholdMs: 60000 * 2,
   notificationConditionCheckIntervalMin: 5,
   notificationConditions: {
-    minOfflineDurationMs: 6000 * 2,
+    minOfflineDurationMs: 60000 * 2,
     minBatteryPercentage: 20,
   },
 };

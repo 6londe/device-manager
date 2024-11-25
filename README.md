@@ -18,6 +18,15 @@ npm run dev
 
 ```
 docker-compose up -d --build
+docker exec -it db mysql -u root -p
+
+CREATE USER 'arm'@'%' IDENTIFIED BY 'strong';
+GRANT ALL PRIVILEGES ON devicemanager.* TO 'arm'@'%';
+FLUSH PRIVILEGES;
+
+docker exec -it server /bin/bash
+npx prisma generate
+npx prisma db push
 ```
 
 ## Notes

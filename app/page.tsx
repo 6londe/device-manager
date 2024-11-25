@@ -4,12 +4,17 @@ import { useEffect, useState } from 'react';
 import config from '../config';
 
 function DeviceDashboard() {
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices] = useState<any[]>([]);
 
   const fetchDevices = async () => {
-    const response = await fetch('/api/devices');
-    const data = await response.json();
-    setDevices(data);
+    try {
+      const response = await fetch('/api/devices');
+      const data = await response.json();
+      setDevices(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Error fetching devices:', error);
+      setDevices([]);
+    }
   };
 
   useEffect(() => {

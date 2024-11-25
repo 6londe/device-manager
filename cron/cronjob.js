@@ -3,9 +3,7 @@ const config = require('./config.js');
 
 async function checkHeartbeatNotificationConditions() {
   try {
-    const response = await axios.get(
-      'http://localhost:3000/api/heartbeats/check'
-    );
+    const response = await axios.get('http://server:3000/api/heartbeats/check');
     console.log('check notification conditions:', response.data);
   } catch (error) {
     console.error('failed to check notification conditions:', error.message);

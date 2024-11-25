@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   server:
-    container_name: device-manager-server
+    container_name: server
     build:
       context: .
     ports:
@@ -13,11 +13,12 @@ services:
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      TZ: Asia/Seoul
     depends_on:
       - db
 
   cron:
-    container_name: device-manager-cron
+    container_name: cron
     build:
       context: .
       dockerfile: cron/Dockerfile
@@ -28,12 +29,13 @@ services:
 
   db:
     image: mysql:8.2.0
-    container_name: device-manager-db
+    container_name: db
     restart: always
     ports:
       - ${DATABASE_PORT}:${DATABASE_PORT}
     environment:
       MYSQL_DATABASE: 'devicemanager'
+      MYSQL_USER: ${DATABASE_USERNAME}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       TZ: Asia/Seoul

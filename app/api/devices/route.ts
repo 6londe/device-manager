@@ -29,7 +29,7 @@ export async function GET() {
 
       const status =
         secSinceLastHeartbeat !== null &&
-        secSinceLastHeartbeat <= config.deviceOfflineStateThresholdMs
+        secSinceLastHeartbeat * 1000 <= config.deviceOfflineStateThresholdMs
           ? 'online'
           : 'offline';
 
@@ -46,7 +46,7 @@ export async function GET() {
               tilt: latestHeartbeat.tilt,
               batteryPercentage: latestHeartbeat.batteryPercentage,
               isCharging: latestHeartbeat.isCharging,
-              currentScreen: latestHeartbeat.currentScreen,
+              screenImagePath: latestHeartbeat.screenImagePath,
             }
           : null,
       };

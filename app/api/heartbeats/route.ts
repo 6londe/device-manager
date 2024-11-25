@@ -14,6 +14,7 @@ export async function POST(request: Request) {
     const batteryPercentage = formData.get('batteryPercentage')?.toString();
     const isCharging = formData.get('isCharging')?.toString() === 'true';
     const appState = formData.get('appState')?.toString();
+    const screenImage = formData.get('screenImage') as File | null;
 
     if (!deviceKey) {
       return new Response(JSON.stringify({ error: 'deviceKey is required' }), {
@@ -34,9 +35,8 @@ export async function POST(request: Request) {
     }
 
     let screenImagePath = null;
-    const screenImage = formData.get('screenImage') as File | null;
-
     if (screenImage) {
+      console.log(screenImage);
       const uploadDir = 'public/screens';
       await fs.mkdir(uploadDir, { recursive: true });
 

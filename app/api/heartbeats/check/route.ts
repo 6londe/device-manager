@@ -17,7 +17,7 @@ export async function GET() {
 
     const messages: string[] = [];
 
-    devices.forEach((device) => {
+    devices.forEach((device: any) => {
       const [latest, previous] = device.Heartbeat;
 
       if (!latest) return;

@@ -79,13 +79,13 @@ function DeviceDashboard() {
       title: 'Tilt',
       dataIndex: ['lastHeartbeatDetails', 'tilt'],
       key: 'tilt',
-      render: (text) => (text ? text : 'N/A'),
+      render: (text: string) => (text ? text : 'N/A'),
     },
     {
       title: 'Battery',
       dataIndex: ['lastHeartbeatDetails', 'batteryPercentage'],
       key: 'batteryPercentage',
-      render: (text) => (text ? `${text}%` : 'N/A'),
+      render: (text: string) => (text ? `${text}%` : 'N/A'),
     },
     {
       title: 'Charging',

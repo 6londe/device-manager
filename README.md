@@ -25,7 +25,6 @@ GRANT ALL PRIVILEGES ON devicemanager.* TO 'arm'@'%';
 FLUSH PRIVILEGES;
 
 docker exec -it server /bin/bash
-npx prisma generate
 npx prisma db push
 ```
 

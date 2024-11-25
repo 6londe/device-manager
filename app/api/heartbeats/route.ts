@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       screenImagePath = filePath.replace(/^public\//, '');
     }
 
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       let device = await tx.device.findUnique({
         where: { deviceKey },
       });

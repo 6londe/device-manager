@@ -16,6 +16,8 @@ services:
       TZ: Asia/Seoul
     depends_on:
       - db
+    volumes:
+      - ./public/files:/app/public/files
 
   cron:
     container_name: cron

@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     let screenImagePath = null;
     if (screenImage) {
       console.log(screenImage);
-      const uploadDir = 'public/screens';
+      const uploadDir = 'public/files';
       await fs.mkdir(uploadDir, { recursive: true });
 
       const newFileName = `${deviceKey}${path.extname(screenImage.name)}`;
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
 
       const fileBuffer = await screenImage.arrayBuffer();
       await fs.writeFile(filePath, Buffer.from(fileBuffer));
-      screenImagePath = filePath.replace(/^public\//, '');
+      screenImagePath = `api/${filePath.replace(/^public\//, '')}`;
     }
 
     const result = await prisma.$transaction(async (tx: any) => {

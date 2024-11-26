@@ -1,14 +1,18 @@
 import config from '@/config';
 import axios from 'axios';
 
-const SLACK_WEBHOOK_URL = config.slackWebhookUrl;
+const webhookUrl = process.env.SLACK_WEBHOOK_URL;
 
 export async function sendSlackMessage(message: string) {
   try {
-    await axios.post(SLACK_WEBHOOK_URL, {
-      text: message,
-    });
-    console.log('Slack message sent');
+    if (webhookUrl) {
+      await axios.post(webhookUrl, {
+        text: message,
+      });
+      console.log('Slack message sent');
+    } else {
+      console.log('Slack webhook url is missing');
+    }
   } catch (error) {
     console.error('Failed to send slack message:', error);
   }

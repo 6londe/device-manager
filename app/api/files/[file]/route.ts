@@ -2,10 +2,7 @@ import { NextResponse } from 'next/server';
 import { join } from 'path';
 import { promises as fs } from 'fs';
 
-export async function GET(
-  req: Request,
-  { params }: { params: { file: string } }
-) {
+export async function GET(req: Request, { params }: any) {
   const { file } = params;
   const filePath = join(process.cwd(), 'public/files', file);
 

@@ -1,4 +1,3 @@
-import config from '@/config';
 import axios from 'axios';
 
 const webhookUrl = process.env.SLACK_WEBHOOK_URL;

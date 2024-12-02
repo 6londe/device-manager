@@ -3,7 +3,7 @@ import { join } from 'path';
 import { promises as fs } from 'fs';
 
 export async function GET(req: Request, { params }: any) {
-  const { file } = params;
+  const { file } = await params;
   const filePath = join(process.cwd(), 'public/files', file);
 
   try {

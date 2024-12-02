@@ -70,7 +70,7 @@ function DeviceDashboard() {
       key: 'deviceKey',
     },
     {
-      title: 'Time',
+      title: 'Last timestamp',
       dataIndex: ['lastHeartbeatDetails', 'timestamp'],
       key: 'timestamp',
       render: (timestamp: string) => {
@@ -85,7 +85,19 @@ function DeviceDashboard() {
         const minutes = kstDate.getMinutes();
         const seconds = kstDate.getSeconds();
 
-        return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분 ${seconds}초`;
+        const now = new Date();
+        const diffMs = now.getTime() - kstDate.getTime();
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffMinutes = Math.floor(
+          (diffMs % (1000 * 60 * 60)) / (1000 * 60)
+        );
+
+        const timeAgo =
+          diffHours === 0 && diffMinutes === 0
+            ? '조금 전'
+            : `${diffHours}시간 ${diffMinutes}분 전`;
+
+        return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분 ${seconds}초 (${timeAgo})`;
       },
     },
     {

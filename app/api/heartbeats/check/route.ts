@@ -58,7 +58,10 @@ export async function GET() {
 
       // check charging
       if (!latest.isCharging) {
-        issues.push(`Device is not charging`);
+        // send notification only if battery percentage is under 90%
+        if (latest.batteryPercentage < 90) {
+          issues.push(`Device is not charging`);
+        }
       }
 
       if (issues.length > 0) {

@@ -3,3 +3,11 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+.offline-row {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.offline-row:hover > td {
+  background-color: rgba(0, 0, 0, 0.09) !important;
+}

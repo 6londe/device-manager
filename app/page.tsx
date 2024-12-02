@@ -49,16 +49,6 @@ function DeviceDashboard() {
         ),
     },
     {
-      title: 'Name',
-      dataIndex: 'nickname',
-      key: 'nickname',
-    },
-    {
-      title: ' Key',
-      dataIndex: 'deviceKey',
-      key: 'deviceKey',
-    },
-    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
@@ -70,29 +60,57 @@ function DeviceDashboard() {
         ),
     },
     {
-      title: 'Timestamp',
+      title: 'Name',
+      dataIndex: 'nickname',
+      key: 'nickname',
+    },
+    {
+      title: ' Key',
+      dataIndex: 'deviceKey',
+      key: 'deviceKey',
+    },
+    {
+      title: 'Time',
       dataIndex: ['lastHeartbeatDetails', 'timestamp'],
       key: 'timestamp',
-      render: (timestamp: string) => (timestamp ? timestamp : 'N/A'),
+      render: (timestamp: string) => {
+        if (!timestamp) return 'N/A';
+
+        const date = new Date(timestamp);
+        const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+
+        const year = kstDate.getFullYear();
+        const month = kstDate.getMonth() + 1;
+        const day = kstDate.getDate();
+        const hours = kstDate.getHours();
+        const minutes = kstDate.getMinutes();
+        const seconds = kstDate.getSeconds();
+
+        return `${year}-${month}-${day} ${hours}시 ${minutes}분 ${seconds}초`;
+      },
     },
     {
       title: 'Tilt',
       dataIndex: ['lastHeartbeatDetails', 'tilt'],
       key: 'tilt',
-      render: (text: string) => (text ? text : 'N/A'),
+      render: (text: string, record: any) =>
+        record.status === 'offline' ? 'N/A' : text || 'N/A',
     },
     {
       title: 'Battery',
       dataIndex: ['lastHeartbeatDetails', 'batteryPercentage'],
       key: 'batteryPercentage',
-      render: (text: string) => (text ? `${text}%` : 'N/A'),
+      render: (text: string, record: any) =>
+        record.status === 'offline' ? 'N/A' : text ? `${text}%` : 'N/A',
     },
     {
       title: 'Charging',
       dataIndex: ['lastHeartbeatDetails', 'isCharging'],
       key: 'isCharging',
-      render: (isCharging: boolean) =>
-        isCharging ? (
+      render: (isCharging: boolean, record: any) =>
+        record.status === 'offline' ? (
+          'N/A'
+        ) : isCharging ? (
           <Badge status='success' text='Yes' />
         ) : (
           <Badge status='error' text='No' />
@@ -107,6 +125,9 @@ function DeviceDashboard() {
         columns={columns}
         rowKey='deviceKey'
         pagination={{ pageSize: 10 }}
+        rowClassName={(record) =>
+          record.status === 'offline' ? 'offline-row' : ''
+        }
       />
     </div>
   );

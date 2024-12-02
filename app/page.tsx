@@ -65,7 +65,7 @@ function DeviceDashboard() {
       key: 'nickname',
     },
     {
-      title: ' Key',
+      title: 'Key',
       dataIndex: 'deviceKey',
       key: 'deviceKey',
     },
@@ -76,8 +76,7 @@ function DeviceDashboard() {
       render: (timestamp: string) => {
         if (!timestamp) return 'N/A';
 
-        const date = new Date(timestamp);
-        const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+        const kstDate = new Date(timestamp);
 
         const year = kstDate.getFullYear();
         const month = kstDate.getMonth() + 1;
@@ -86,7 +85,7 @@ function DeviceDashboard() {
         const minutes = kstDate.getMinutes();
         const seconds = kstDate.getSeconds();
 
-        return `${year}-${month}-${day} ${hours}시 ${minutes}분 ${seconds}초`;
+        return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분 ${seconds}초`;
       },
     },
     {

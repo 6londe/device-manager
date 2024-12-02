@@ -8,8 +8,8 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
 
-    const deviceKey = formData.get('deviceKey')?.toString();
-    const nickname = formData.get('nickname')?.toString();
+    const deviceKey = formData.get('deviceKey')?.toString().replace(/"/g, '');
+    const nickname = formData.get('nickname')?.toString().replace(/"/g, '');
     const tilt = formData.get('tilt')?.toString() || 'unknown';
     const batteryPercentage = formData.get('batteryPercentage')?.toString();
     const isCharging = formData.get('isCharging')?.toString() === 'true';

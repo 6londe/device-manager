@@ -57,6 +57,11 @@ export async function POST(request: Request) {
         device = await tx.device.create({
           data: { deviceKey, nickname: nickname || deviceKey },
         });
+      } else {
+        device = await tx.device.update({
+          where: { id: device.id },
+          data: { nickname: nickname || deviceKey },
+        });
       }
 
       const heartbeat = await tx.heartbeat.create({

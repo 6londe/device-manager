@@ -64,11 +64,13 @@ export async function GET() {
         }
       }
 
+      // TODO: check tilt
+
       if (issues.length > 0) {
         messages.push(
-          `Device ID: ${device.id}, Device Key: ${
-            device.deviceKey
-          }\n- ${issues.join('\n- ')}`
+          `Device nickname: ${device.nickname}, Device ID: ${
+            device.id
+          }, Device Key: ${device.deviceKey}\n- ${issues.join('\n- ')}`
         );
       }
     });

@@ -18,8 +18,9 @@ export async function GET() {
     const messages: string[] = [];
 
     devices.forEach((device: any) => {
-      const [latest, previous] = device.Heartbeat;
+      if (!device.notification) return;
 
+      const [latest, previous] = device.Heartbeat;
       if (!latest) return;
 
       const issues: string[] = [];
@@ -58,13 +59,10 @@ export async function GET() {
 
       // check charging
       if (!latest.isCharging) {
-        // send notification only if battery percentage is under 90%
         if (latest.batteryPercentage < 90) {
           issues.push(`Device is not charging`);
         }
       }
-
-      // TODO: check tilt
 
       if (issues.length > 0) {
         messages.push(
@@ -80,11 +78,10 @@ export async function GET() {
       await sendSlackMessage(message);
     }
 
-    return new Response('OK', {
-      status: 200,
-    });
+    console.log(`${messages.length} issues detected and sent to slack`);
+    return new Response('OK', { status: 200 });
   } catch (error) {
-    console.error('Error occured:', error);
+    console.error('Error occurred:', error);
     return new Response('Error occurred', { status: 500 });
   } finally {
     await prisma.$disconnect();

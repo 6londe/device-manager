@@ -36,7 +36,6 @@ export async function POST(request: Request) {
 
     let screenImagePath = null;
     if (screenImage) {
-      console.log(screenImage);
       const uploadDir = 'public/files';
       await fs.mkdir(uploadDir, { recursive: true });
 
@@ -79,6 +78,7 @@ export async function POST(request: Request) {
       return { device, heartbeat };
     });
 
+    console.log(`${deviceKey} (${nickname}) heartbeat processed`);
     return new Response(JSON.stringify(result), { status: 201 });
   } catch (error) {
     console.error('Error processing heartbeat:', error);

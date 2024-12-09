@@ -35,6 +35,16 @@ export async function GET() {
         );
       }
 
+      // check roll
+      if (
+        previous &&
+        Math.abs(Number(latest.tilt) - Number(previous.roll)) >= 10
+      ) {
+        issues.push(
+          `Roll changed by 10 or more (Previous: ${previous.roll}, Current: ${latest.roll})`
+        );
+      }
+
       // check offline
       if (
         new Date(latest.timestamp) <

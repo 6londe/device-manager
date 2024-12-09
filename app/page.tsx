@@ -144,6 +144,13 @@ function DeviceDashboard() {
         record.status === 'offline' ? 'N/A' : text || 'N/A',
     },
     {
+      title: 'Roll',
+      dataIndex: ['lastHeartbeatDetails', 'roll'],
+      key: 'roll',
+      render: (text: string, record: any) =>
+        record.status === 'offline' ? 'N/A' : text || 'N/A',
+    },
+    {
       title: 'Battery',
       dataIndex: ['lastHeartbeatDetails', 'batteryPercentage'],
       key: 'batteryPercentage',

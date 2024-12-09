@@ -12,6 +12,7 @@ model Device {
   id        Int        @id @default(autoincrement())
   deviceKey String     @unique
   nickname  String
+  notification Boolean @default(true)
   Heartbeat Heartbeat[]
 }
 

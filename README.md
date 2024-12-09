@@ -44,4 +44,5 @@ FLUSH PRIVILEGES;
 ```
 npx prisma migrate dev --name []
 npx prisma generate
+npx prisma db push
 ```

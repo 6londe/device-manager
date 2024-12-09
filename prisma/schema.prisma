@@ -21,7 +21,7 @@ model Heartbeat {
   timestamp         DateTime @default(now())
   appState          Int
   deviceId          Int
-  tilt              String
+  pitch             String
   roll              String
   batteryPercentage Int
   isCharging        Boolean

@@ -25,20 +25,20 @@ export async function GET() {
 
       const issues: string[] = [];
 
-      // check tilt
+      // check pitch
       if (
         previous &&
-        Math.abs(Number(latest.tilt) - Number(previous.tilt)) >= 10
+        Math.abs(Number(latest.pitch) - Number(previous.pitch)) >= 10
       ) {
         issues.push(
-          `Tilt changed by 10 or more (Previous: ${previous.tilt}, Current: ${latest.tilt})`
+          `Pitch changed by 10 or more (Previous: ${previous.pitch}, Current: ${latest.pitch})`
         );
       }
 
       // check roll
       if (
         previous &&
-        Math.abs(Number(latest.tilt) - Number(previous.roll)) >= 10
+        Math.abs(Number(latest.roll) - Number(previous.roll)) >= 10
       ) {
         issues.push(
           `Roll changed by 10 or more (Previous: ${previous.roll}, Current: ${latest.roll})`

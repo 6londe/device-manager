@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
     const deviceKey = formData.get('deviceKey')?.toString().replace(/"/g, '');
     const nickname = formData.get('nickname')?.toString().replace(/"/g, '');
-    const tilt = formData.get('tilt')?.toString() || 'unknown';
+    const pitch = formData.get('pitch')?.toString() || 'unknown';
     const roll = formData.get('roll')?.toString() || 'unknown';
     const batteryPercentage = formData.get('batteryPercentage')?.toString();
     const isCharging = formData.get('isCharging')?.toString() === 'true';
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
         data: {
           deviceId: device.id,
           timestamp: new Date(),
-          tilt,
+          pitch,
           roll,
           batteryPercentage: batteryPercentage ? Number(batteryPercentage) : 0,
           isCharging,

@@ -66,9 +66,7 @@ export async function GET() {
 
       if (issues.length > 0) {
         messages.push(
-          `Device nickname: ${device.nickname}, Device ID: ${
-            device.id
-          }, Device Key: ${device.deviceKey}\n- ${issues.join('\n- ')}`
+          `${device.nickname} (${device.deviceKey})\n- ${issues.join('\n- ')}`
         );
       }
     });

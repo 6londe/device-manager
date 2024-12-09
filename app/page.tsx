@@ -137,9 +137,9 @@ function DeviceDashboard() {
       },
     },
     {
-      title: 'Tilt',
-      dataIndex: ['lastHeartbeatDetails', 'tilt'],
-      key: 'tilt',
+      title: 'Pitch',
+      dataIndex: ['lastHeartbeatDetails', 'pitch'],
+      key: 'pitch',
       render: (text: string, record: any) =>
         record.status === 'offline' ? 'N/A' : text || 'N/A',
     },

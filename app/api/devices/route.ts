@@ -44,7 +44,7 @@ export async function GET() {
         lastHeartbeatDetails: latestHeartbeat
           ? {
               timestamp: latestHeartbeat.timestamp,
-              tilt: latestHeartbeat.tilt,
+              pitch: latestHeartbeat.pitch,
               roll: latestHeartbeat.roll,
               batteryPercentage: latestHeartbeat.batteryPercentage,
               isCharging: latestHeartbeat.isCharging,

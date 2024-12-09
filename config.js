@@ -1,9 +1,9 @@
 module.exports = {
   heartbeatIntervalMs: 30000,
-  deviceOfflineStateThresholdMs: 30000 * 2,
+  deviceOfflineStateThresholdMs: 30000 * 1.5,
   notificationConditionCheckIntervalMin: 10,
   notificationConditions: {
-    minOfflineDurationMs: 30000 * 2,
+    minOfflineDurationMs: 30000 * 1.5,
     minBatteryPercentage: 50,
   },
 };

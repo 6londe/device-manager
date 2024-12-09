@@ -53,7 +53,7 @@ export async function GET() {
         )
       ) {
         issues.push(
-          `Device has been offline for more than 2 minutes (Timestamp: ${latest.timestamp.toISOString()})`
+          `Device has been offline (${latest.timestamp.toISOString()})`
         );
       }
 

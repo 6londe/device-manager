@@ -28,20 +28,22 @@ export async function GET() {
       // check pitch
       if (
         previous &&
-        Math.abs(Number(latest.pitch) - Number(previous.pitch)) >= 10
+        Math.abs(Number(latest.pitch) - Number(previous.pitch)) >=
+          config.notificationConditions.minPitchChange
       ) {
         issues.push(
-          `Pitch changed by 10 or more (Previous: ${previous.pitch}, Current: ${latest.pitch})`
+          `Pitch value changed (Previous: ${previous.pitch}, Current: ${latest.pitch})`
         );
       }
 
       // check roll
       if (
         previous &&
-        Math.abs(Number(latest.roll) - Number(previous.roll)) >= 10
+        Math.abs(Number(latest.roll) - Number(previous.roll)) >=
+          config.notificationConditions.minRollChange
       ) {
         issues.push(
-          `Roll changed by 10 or more (Previous: ${previous.roll}, Current: ${latest.roll})`
+          `Roll value changed (Previous: ${previous.roll}, Current: ${latest.roll})`
         );
       }
 

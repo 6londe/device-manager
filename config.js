@@ -5,5 +5,7 @@ module.exports = {
   notificationConditions: {
     minOfflineDurationMs: 30000 * 1.5,
     minBatteryPercentage: 50,
+    minPitchChange: 2,
+    minRollChange: 2,
   },
 };

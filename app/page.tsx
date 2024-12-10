@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Table, Badge, Image, Switch, Modal } from 'antd';
+import { Table, Badge, Image, Switch, Modal, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import config from '../config';
 
 const DEFAULT_FALLBACK_IMAGE =
@@ -62,6 +63,38 @@ function DeviceDashboard() {
           Modal.error({
             title: 'Error',
             content: 'Failed to update notification setting',
+          });
+        }
+      },
+    });
+  };
+
+  const handleDeleteDevice = async (deviceKey: string, nickname: string) => {
+    Modal.confirm({
+      title: `Delete "${nickname}" device?`,
+      okText: 'Delete',
+      okType: 'danger',
+      cancelText: 'Cancel',
+      onOk: async () => {
+        try {
+          const response = await fetch(`/api/devices/${deviceKey}`, {
+            method: 'DELETE',
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to delete device');
+          }
+
+          fetchDevices();
+
+          Modal.success({
+            title: 'Device deleted successfully',
+          });
+        } catch (error) {
+          console.error('Error deleting device:', error);
+          Modal.error({
+            title: 'Error',
+            content: 'Failed to delete device',
           });
         }
       },
@@ -180,6 +213,18 @@ function DeviceDashboard() {
           onChange={(checked) =>
             handleNotificationChange(record.deviceKey, checked)
           }
+        />
+      ),
+    },
+    {
+      title: 'Delete',
+      key: 'action',
+      render: (_: any, record: any) => (
+        <Button
+          type='text'
+          danger
+          icon={<DeleteOutlined />}
+          onClick={() => handleDeleteDevice(record.deviceKey, record.nickname)}
         />
       ),
     },

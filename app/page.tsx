@@ -231,7 +231,12 @@ function DeviceDashboard() {
   ];
 
   return (
-    <div>
+    <div
+      style={{
+        overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
+      }}
+    >
       <Table
         dataSource={devices}
         columns={columns}
@@ -240,6 +245,7 @@ function DeviceDashboard() {
         rowClassName={(record) =>
           record.status === 'offline' ? 'offline-row' : ''
         }
+        scroll={{ x: 'max-content' }}
       />
     </div>
   );

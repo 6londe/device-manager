@@ -162,7 +162,7 @@ function DeviceDashboard() {
         );
 
         const timeAgo =
-          diffHours === 0 && diffMinutes === 0
+          diffMs < 0 || (diffHours === 0 && diffMinutes === 0)
             ? '조금 전'
             : `${diffHours}시간 ${diffMinutes}분 전`;
 
